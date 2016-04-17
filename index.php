@@ -77,27 +77,22 @@ require 'class.LaptopList.php';
 
                     <div class="col-sm-4 col-lg-4 col-md-4 inlinespecial">
                        <?php
-                       $minPrice  = 0;
-                       $maxPrice = 1000000000;
 
-                       if ($_POST['minimalstring'] != null ) {
-                           $minPrice = $_POST['minimalstring'];
-                       }
-                       
-                       if ($_POST['maximalstring'] != null) {
-                           $maxPrice = $_POST['maximalstring'];
-                       }
+                       if ($_POST['minimalstring'] != null ) { $minPrice  = $_POST['minimalstring']; } else {$minPrice  = 0;}
+                       if ($_POST['maximalstring'] != null) { $maxPrice = $_POST['maximalstring']; } else {$maxPrice = 1000000000;}
 
-                       if (isset($_POST['submit']) || isset($_POST['submit']) == null) {
-                           foreach ($lijst as $laptop) {
-                               echo '<div class="thumbnail size-fix"> ';
-                               echo '<img class= "laptop-pic" src=" '. $laptop->getPath() .  ' ">';
-                               echo  '<div class="caption">';
-                               echo '<h4><a href="#">'.  $laptop->getName()  ." "   .   $laptop->getType()      .        '</a>';
-                               echo '<br> <br> <br>';
-                               echo '<h4 class="pull-right">€'.  $laptop->getPrice() .'</h4>';
-                               echo '</div>';
-                               echo '</div>';
+                       foreach ($lijst as $laptop) {
+                           if (isset($_POST['submit']) || isset($_POST['submit']) == null) {
+                               if ($laptop->getPrice() >= $minPrice && $laptop->getPrice() <= $maxPrice) {
+                                   echo '<div class="thumbnail size-fix"> ';
+                                   echo '<img class= "laptop-pic" src=" '. $laptop->getPath() .  ' ">';
+                                   echo  '<div class="caption">';
+                                   echo '<h4><a href="#">'.  $laptop->getName()  ." "   .   $laptop->getType()      .        '</a>';
+                                   echo '<br> <br> <br>';
+                                   echo '<h4 class="pull-right">€'.  $laptop->getPrice() .'</h4>';
+                                   echo '</div>';
+                                   echo '</div>';
+                               }
                            }
                        }
                         ?>
