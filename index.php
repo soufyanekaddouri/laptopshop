@@ -60,10 +60,11 @@ require 'class.LaptopList.php';
                                 <input type="text" placeholder="Maximal Price" name="maximalstring">
                                 <input type="submit" name="submit" value="Search"><br> <br>
 
-
                                 <select name="laptopchoice">
                                     <option value="all">All Laptops</option>
                                     <option value="hp">HP</option>
+                                    <option value="asus">Asus</option>
+                                    <option value="lenovo">Lenovo</option>
                                 </select>
 
                             </form>
@@ -76,17 +77,29 @@ require 'class.LaptopList.php';
 
                     <div class="col-sm-4 col-lg-4 col-md-4 inlinespecial">
                        <?php
+                       $minPrice  = 0;
+                       $maxPrice = 1000000000;
 
-                        foreach ($lijst as $laptop) {
-                            echo '<div class="thumbnail size-fix"> ';
-                            echo '<img class= "laptop-pic" src=" '. $laptop->getPath() .  ' ">';
-                            echo  '<div class="caption">';
-                            echo '<h4><a href="#">'.  $laptop->getName()  ." "   .   $laptop->getType()      .        '</a>';
-                            echo '<br> <br> <br>';
-                            echo '<h4 class="pull-right">€'.  $laptop->getPrice() .'</h4>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
+                       if ($_POST['minimalstring'] != null ) {
+                           $minPrice = $_POST['minimalstring'];
+                       }
+                       
+                       if ($_POST['maximalstring'] != null) {
+                           $maxPrice = $_POST['maximalstring'];
+                       }
+
+                       if (isset($_POST['submit']) || isset($_POST['submit']) == null) {
+                           foreach ($lijst as $laptop) {
+                               echo '<div class="thumbnail size-fix"> ';
+                               echo '<img class= "laptop-pic" src=" '. $laptop->getPath() .  ' ">';
+                               echo  '<div class="caption">';
+                               echo '<h4><a href="#">'.  $laptop->getName()  ." "   .   $laptop->getType()      .        '</a>';
+                               echo '<br> <br> <br>';
+                               echo '<h4 class="pull-right">€'.  $laptop->getPrice() .'</h4>';
+                               echo '</div>';
+                               echo '</div>';
+                           }
+                       }
                         ?>
 
                     </div>
