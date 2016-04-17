@@ -90,14 +90,16 @@ require 'class.LaptopList.php';
 
                        if (isset($_POST['submit']) || isset($_POST['submit']) == null) {
                            foreach ($lijst as $laptop) {
-                               echo '<div class="thumbnail size-fix"> ';
-                               echo '<img class= "laptop-pic" src=" '. $laptop->getPath() .  ' ">';
-                               echo  '<div class="caption">';
-                               echo '<h4><a href="#">'.  $laptop->getName()  ." "   .   $laptop->getType()      .        '</a>';
-                               echo '<br> <br> <br>';
-                               echo '<h4 class="pull-right">€'.  $laptop->getPrice() .'</h4>';
-                               echo '</div>';
-                               echo '</div>';
+                                if($laptop->getPrice() >= $minPrice && $laptop->getPrice() <= $maxPrice && $_POST['type'] == $laptop->getType()) {
+                                    echo '<div class="thumbnail size-fix"> ';
+                                    echo '<img class= "laptop-pic" src=" '. $laptop->getPath() .  ' ">';
+                                    echo  '<div class="caption">';
+                                    echo '<h4><a href="#">'.  $laptop->getName()  ." "   .   $laptop->getType()      .        '</a>';
+                                    echo '<br> <br> <br>';
+                                    echo '<h4 class="pull-right">€'.  $laptop->getPrice() .'</h4>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
                            }
                        }
                         ?>
