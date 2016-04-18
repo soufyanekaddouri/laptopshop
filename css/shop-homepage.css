@@ -55,7 +55,23 @@ footer {
 }
 
 .laptop-pic {
-    width: 120px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
+}
+
+.thumbnailZ {
+    border: 3px solid black;
+    margin: 5px;
+    padding: 9px;
+}
+
+.thumbnailZ img {
+    margin-left: 50px;
+}
+
+.inlinespecial {
+    display: inline-flex;
+    width: 705px;
+    overflow: scroll;
 }
 

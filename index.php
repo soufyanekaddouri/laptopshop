@@ -62,9 +62,9 @@ require 'class.LaptopList.php';
 
                                 <select name="laptopchoice">
                                     <option value="all">All Laptops</option>
-                                    <option value="hp">HP</option>
-                                    <option value="asus">Asus</option>
-                                    <option value="lenovo">Lenovo</option>
+                                    <option value="HP">HP</option>
+                                    <option value="Asus">Asus</option>
+                                    <option value="Lenovo">Lenovo</option>
                                 </select>
 
                             </form>
@@ -82,9 +82,19 @@ require 'class.LaptopList.php';
                        if ($_POST['maximalstring'] != null) { $maxPrice = $_POST['maximalstring']; } else {$maxPrice = 1000000000;}
 
                        foreach ($lijst as $laptop) {
-                           if (isset($_POST['submit']) || isset($_POST['submit']) == null) {
-                               if ($laptop->getPrice() >= $minPrice && $laptop->getPrice() <= $maxPrice) {
-                                   echo '<div class="thumbnail size-fix"> ';
+                           if (!isset($_POST['submit']) || $_POST['laptopchoice'] == 'all') {
+                               echo '<div class="thumbnailZ size-fix"> ';
+                               echo '<img class= "laptop-pic" src=" '. $laptop->getPath() .  ' ">';
+                               echo  '<div class="caption">';
+                               echo '<h4><a href="#">'.  $laptop->getName()  ." "   .   $laptop->getType()      .        '</a>';
+                               echo '<br> <br> <br>';
+                               echo '<h4 class="pull-right">€'.  $laptop->getPrice() .'</h4>';
+                               echo '</div>';
+                               echo '</div>';
+                           } else {
+
+                               if ($laptop->getPrice() >= $minPrice && $laptop->getPrice() <= $maxPrice && $laptop->getName() == $_POST['laptopchoice'] || $_POST['laptopchoice'] == 'all') {
+                                   echo '<div class="thumbnailZ size-fix"> ';
                                    echo '<img class= "laptop-pic" src=" '. $laptop->getPath() .  ' ">';
                                    echo  '<div class="caption">';
                                    echo '<h4><a href="#">'.  $laptop->getName()  ." "   .   $laptop->getType()      .        '</a>';
@@ -92,7 +102,9 @@ require 'class.LaptopList.php';
                                    echo '<h4 class="pull-right">€'.  $laptop->getPrice() .'</h4>';
                                    echo '</div>';
                                    echo '</div>';
+
                                }
+
                            }
                        }
                         ?>
